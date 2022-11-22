@@ -25,6 +25,8 @@ services:
       DB_PASS: admin123
     links:
       - db
+    depends_on:
+      - db
 
 volumes:
   postgres:
