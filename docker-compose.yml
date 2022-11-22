@@ -1,0 +1,30 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: freelance
+      POSTGRES_USER: admin
+      POSTGRES_PASSWORD: admin123
+      PGDATA: /data/postgres
+    ports:
+      - '5433:5432'
+    volumes:
+      - postgres:/data/postgres
+
+  freelance_bot:
+    build: FreelanceBot
+    restart: always
+    environment:
+      TOKEN:
+      DB_HOST: db
+      DB_PORT: 5433
+      DB_NAME: freelance
+      DB_USER: admin
+      DB_PASS: admin123
+    links:
+      - db
+
+volumes:
+  postgres:
