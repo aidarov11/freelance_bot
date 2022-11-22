@@ -12,6 +12,8 @@ services:
       - '5433:5432'
     volumes:
       - postgres:/data/postgres
+    networks:
+      - custom
 
   freelance_bot:
     build: FreelanceBot
@@ -27,6 +29,12 @@ services:
       - db
     depends_on:
       - db
+    networks:
+      - custom
 
 volumes:
   postgres:
+
+networks:
+  custom:
+    driver: brige
